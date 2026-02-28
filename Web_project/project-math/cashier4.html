@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Caesar & General Shift Cipher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style_ca4.css" />
+</head>
+<body>
+  <!-- Top navigation bar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="logo-circle">
+        <div class="logo-text">
+          <img src="D:/HTML/image/Rupp.png" alt="RUPP Logo">
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#" class="nav-link">CAESAR CIPHER</a>
+        <a href="#" class="nav-link">GENERAL SHIFT CIPHER</a>
+        <a href="#" class="nav-link">AFFINE CIPHER</a>
+        <a href="#" class="nav-link">TRANSPOSITION CIPHER</a>
+        <a href="#" class="nav-link">RSA CRYPTOGRAPHY</a>
+      </nav>
+    </div>
+    </header>
+
+  <!-- Main content -->
+  <main class="page-content">
+    <section class="text-section">
+      <h1>I. Classical Cryptography</h1>
+      <h2 class = "indent1">I.I. Caesar Cipher in Cryptography</h2>
+      <p >
+         <div class ="indent2" >
+            The Caesar Cipher is one of the simplest and oldest methods of encrypting
+        messages, named after Julius Caesar, who reportedly used it to protect his
+        military communications. This technique involves shifting the letters of
+        the alphabet by a fixed number of places. For example, with a shift of
+        three, the letter 'A' becomes 'D', 'B' becomes 'E', and so on. Despite its
+        simplicity, the Caesar Cipher formed the groundwork for modern cryptographic techniques. In this article, we'll explore how the Caesar
+        Cipher works, its significance, and its impact on the development of
+        cryptography with its advantages and disadvantages.</div>
+      </p>
+    </section>
+
+    <section class="image-section">
+      <img
+        src="D:/HTML/image/caesar-cipher-wheel_image.webp"
+        class="cipher-image"
+        alt="Caesar cipher wheel"
+      />
+    </section>
+
+    <section class="text-section-after">
+      <h2 class = "indent3">Cryptography Algorithm For the Caesar Cipher</h2>
+      <div class = "indent4">
+        ⇒ To cipher given text we need an integer value,known as a shift,
+        which indicates the number of positions each letter of the text has been moved down.
+        
+      </div>
+      <div class = "indent6">
+        The encryption can be represented using modular arithmetic by first
+        transforming the letters into numbers, according to the scheme
+        A = 0, B = 1, ..., Z = 25. 
+      </div>
+      <div class = "indent16">Encryption of a letter by a shift n can be
+        described mathematically as a rotation in this number system.</div>
+      <div class="indent7 ">
+        ⇒ For example, if the shift is 3, then the letter A would be replaced
+        by the letter D, B would become E, C would become F, and so on. The
+        alphabet is 
+      </div>
+      <div class="indent17">wrapped around so that after Z, it starts back at A.</div>
+      <h3>Here is an example of how to use the Caesar cipher to encrypt the message "HELLO" with a shift of 3:</h4>
+      <div>1. Plaintext message: HELLO</div>
+      <div>2. Choose a shift value of 3.</div>
+      <div>3. Replace each letter in the plaintext message with the letter that is three positions to the right in the alphabet.</div>
+      <div>4. The encrypted message is "KHOOR".</div>
+      <div>To decrypt the message, shift each letter back by the same number of positions. Shifting "KHOOR" back by 3 gives the original message "HELLO".</div>
+    </section>
+     </main>
+  <!-- Caesar Cipher Demo (Fixed Shift = 3) -->
+  <main class="demo-wrapper">
+    <h1 class="demo-title">Caesar Cipher Demo</h1>
+    <div class="demo-frame">
+      <div class="demo-frame-corner top-left"></div>
+      <div class="demo-frame-corner top-right"></div>
+      <div class="demo-frame-corner bottom-left"></div>
+      <div class="demo-frame-corner bottom-right"></div>
+      <div class="demo-inner">
+        <h2 class="demo-subtitle">Enter | Plain text or Cipher text</h2>
+        <input type="text" id="caesarInput" class="demo-input" placeholder="Enter text here" />
+        <div class="demo-buttons">
+          <button class="btn-pill btn-green" onclick="caesarEncrypt()">Encrypt</button>
+          <button class="btn-pill btn-red" onclick="caesarDecrypt()">Decrypt</button>
+        </div>
+        <div class="demo-result-block">
+          <span class="demo-result-label">Result:</span>
+          <div id="caesarResult" class="demo-result-box"></div>
+        </div>
+      </div>
+    </div>
+    <!-- General Shift Cipher content -->
+  <section class="page-content2">
+    <h1 class = "indent8">I.II. General Shift Cipher</h1>
+      <section class="text-section2">
+         <p class="indent9">
+           The General Shift Cipher is a more advanced version of the Caesar Cipher.</h4>
+           Instead of a fixed shift of three positions, it allows for any integer value as the shift. This means that you can choose any number to shift the letters in the alphabet, making it more versatile and secure.</h4>
+        </p>
+      </section>
+    </section>
+  
+  </main>
+
+  <!-- General Shift Cipher Demo (Variable Key) -->
+  <main class="demo-wrapper">
+    <h1 class="demo-title">General Shift Cipher Demo</h1>
+    <div class="demo-frame">
+      <div class="demo-frame-corner top-left"></div>
+      <div class="demo-frame-corner top-right"></div>
+      <div class="demo-frame-corner bottom-left"></div>
+      <div class="demo-frame-corner bottom-right"></div>
+      <div class="demo-inner">
+        <h2 class="demo-subtitle">Enter | Plain text or Cipher text</h2>
+        <input type="text" id="generalInput" class="demo-input" placeholder="Enter text here" />
+        <div class="demo-key-section">
+          <label class="key-label">Key:</label>
+          <input type="number" id="generalKey" class="key-input" placeholder="Shift value" min="1" max="25" value="" />
+        </div>
+        <div class="demo-buttons">
+          <button class="btn-pill btn-green" onclick="generalEncrypt()">Encrypt</button>
+          <button class="btn-pill btn-red" onclick="generalDecrypt()">Decrypt</button>
+          <button class="btn-pill btn-blue" onclick="generalBruteForce()">Brute Force Attack</button>
+        </div>
+        <div class="demo-result-block">
+          <span class="demo-result-label">Result:</span>
+          <div id="generalResult" class="demo-result-box"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SINGLE JAVASCRIPT with ALL FUNCTIONS -->
+  <script>
+    // ===== CAESAR CIPHER (Fixed shift = 3) =====
+    function caesarEncrypt() {
+      const input = document.getElementById('caesarInput').value.toUpperCase();
+      if (!input) {
+        document.getElementById('caesarResult').innerText = 'No Result';
+        return;
+      }
+      let result = '';
+      for (let i = 0; i < input.length; i++) {
+        let charCode = input.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+          let x = charCode - 65;
+          let newPos = ((x + 3) % 26 + 26) % 26;
+          result += String.fromCharCode(newPos + 65);
+        } else {
+          result += input[i];
+        }
+      }
+      document.getElementById('caesarResult').innerText = result;
+    }
+
+    function caesarDecrypt() {
+      const input = document.getElementById('caesarInput').value.toUpperCase();
+      if (!input) {
+        document.getElementById('caesarResult').innerText = 'No Result';
+        return;
+      }
+      let result = '';
+      for (let i = 0; i < input.length; i++) {
+        let charCode = input.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+          let x = charCode - 65;
+          let newPos = ((x - 3 + 26) % 26 + 26) % 26;
+          result += String.fromCharCode(newPos + 65);
+        } else {
+          result += input[i];
+        }
+      }
+      document.getElementById('caesarResult').innerText = result;
+    }
+
+    // ===== GENERAL SHIFT CIPHER (Variable key) =====
+    function generalEncrypt() {
+      const input = document.getElementById('generalInput').value;
+      const shift = parseInt(document.getElementById('generalKey').value) || 3;
+      if (!input) {
+        document.getElementById('generalResult').innerText = 'No Result';
+        return;
+      }
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let result = '';
+      for (let i = 0; i < input.length; i++) {
+        const char = input[i].toUpperCase();
+        const index = alphabet.indexOf(char);
+        if (index !== -1) {
+          const newIndex = (index + shift) % 26;
+          result += alphabet[newIndex];
+        } else {
+          result += char;
+        }
+      }
+      document.getElementById('generalResult').innerText = result;
+    }
+
+    function generalDecrypt() {
+      const input = document.getElementById('generalInput').value;
+      const shift = parseInt(document.getElementById('generalKey').value) || 3;
+      if (!input) {
+        document.getElementById('generalResult').innerText = 'No Result';
+        return;
+      }
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let result = '';
+      for (let i = 0; i < input.length; i++) {
+        const char = input[i].toUpperCase();
+        const index = alphabet.indexOf(char);
+        if (index !== -1) {
+          const newIndex = (index - shift + 26) % 26;
+          result += alphabet[newIndex];
+        } else {
+          result += char;
+        }
+      }
+      document.getElementById('generalResult').innerText = result;
+    }
+
+    function generalBruteForce() {
+      const input = document.getElementById('generalInput').value;
+      if (!input) {
+        document.getElementById('generalResult').innerText = 'No Result';
+        return;
+      }
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let results = [];
+      for (let shift = 1; shift < 26; shift++) {
+        let plaintext = '';
+        for (let i = 0; i < input.length; i++) {
+          const char = input[i].toUpperCase();
+          const index = alphabet.indexOf(char);
+          if (index !== -1) {
+            const newIndex = (index - shift + 26) % 26;
+            plaintext += alphabet[newIndex];
+          } else {
+            plaintext += char;
+          }
+        }
+        results.push({ shift, plaintext });
+      }
+      let resultText = 'Shift 1: ' + results[0].plaintext + '\n' +
+                      'Shift 2: ' + results[1].plaintext + '\n' +
+                      'Shift 3: ' + results[2].plaintext + '\n' +
+                      '...\n' +
+                      'Shift 25: ' + results[24].plaintext;
+      document.getElementById('generalResult').innerText = resultText;
+    }
+  </script>
+  <section class="page-content3">
+      <section class="text-section3">
+        <h1 class=" indent10">I.III. Affine Cipher</h1>
+        <p class="indent11">
+          The Affine Cipher is a more complex encryption method that combines both a shift and a multiplication operation. It uses two keys:</h4>
+          One for the shift and another for 
+        </p>
+        <div class="indent12">the multiplication. the formula for encryption is E(x) = (ax + b) mod 26, Where 'a' and 'b' are the Keys, and 'X' is the numerical representation of the letter.</div>
+      </section>
+    </section>
+    <!-- Affine Cipher Demo -->
+<main class="demo-wrapper">
+  <h1 class="demo-title">Affine Cipher Demo</h1>
+
+  <div class="demo-frame">
+    <div class="demo-frame-corner top-left"></div>
+    <div class="demo-frame-corner top-right"></div>
+    <div class="demo-frame-corner bottom-left"></div>
+    <div class="demo-frame-corner bottom-right"></div>
+
+    <div class="demo-inner">
+      <h2 class="demo-subtitle">Enter | Plain text or Cipher text</h2>
+
+      <input
+        type="text"
+        id="affineInput"
+        class="demo-input"
+        placeholder="Enter text here"
+      />
+      <div class="demo-key-section">
+        <button class="btn-pill btn-green" onclick="affineEncrypt()">
+          Encrypt
+        </button>
+        <div class="affine-keys">
+          <div>
+            <label class="key-label">Key a:</label>
+            <input
+              type="number"
+              id="affineKeyA"
+              class="key-input"
+              min="1"
+              max="25"
+              value="NUM A:"
+            />
+          </div>
+          <div>
+            <label class="key-label">Key b:</label>
+            <input
+              type="number"
+              id="affineKeyB"
+              class="key-input"
+              min="0"
+              max="25"
+              value="NUM B:"
+            />
+          </div>
+        </div>
+        <button class="btn-pill btn-red" onclick="affineDecrypt()">
+          Decrypt
+        </button>
+        <button class="btn-pill btn-blue" onclick="affineBruteForce()">
+          Brute Force Attack
+        </button>
+      </div>
+      <div class="demo-result-block">
+        <span class="demo-result-label">Result:</span>
+        <div id="affineResult" class="demo-result-box"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+  // ===== Affine Cipher core functions (your code, without export) =====
+  function affineCipherEncrypt(plaintext, a, b) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const mod = alphabet.length;
+    let ciphertext = '';
+    for (let char of plaintext.toUpperCase()) {
+      if (alphabet.includes(char)) {
+        const x = alphabet.indexOf(char);
+        const y = (a * x + b) % mod;
+        ciphertext += alphabet[y];
+      } else {
+        ciphertext += char;
+      }
+    }
+    return ciphertext;
+  }
+  function affineCipherDecrypt(ciphertext, a, b) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const mod = alphabet.length;
+    let plaintext = '';
+    const aInverse = modInverse(a, mod); // modular inverse of a
+    if (aInverse === -1) {
+      return 'Error: a must be coprime with 26 (no modular inverse).';
+    }
+    for (let char of ciphertext.toUpperCase()) {
+      if (alphabet.includes(char)) {
+        const y = alphabet.indexOf(char);
+        const x = (aInverse * (y - b + mod)) % mod;
+        plaintext += alphabet[x];
+      } else {
+        plaintext += char;
+      }
+    }
+    return plaintext;
+  }
+  function affine_brute_force_decrypt(ciphertext) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const results = [];
+    for (let a = 1; a < 26; a++) {
+      if (gcd(a, 26) === 1) {
+        const aInv = modInverse(a, 26);
+        for (let b = 0; b < 26; b++) {
+          let plaintext = '';
+          for (let char of ciphertext.toUpperCase()) {
+            if (alphabet.includes(char)) {
+              const y = alphabet.indexOf(char);
+              const x = (aInv * (y - b + 26)) % 26;
+              plaintext += alphabet[x];
+            } else {
+              plaintext += char;
+            }
+          }
+          results.push({ a, b, plaintext });
+        }
+      }
+    }
+    return results;
+  }
+  function gcd(a, b) {
+    while (b) {
+      const temp = b;
+      b = a % b;
+      a = temp;
+    }
+    return a;
+  }
+  function modInverse(a, m) {
+    a = a % m;
+    for (let x = 1; x < m; x++) {
+      if ((a * x) % m === 1) {
+        return x;
+      }
+    }
+    return -1;
+  }
+  // ===== Affine Cipher button handlers =====
+  function affineEncrypt() {
+    const text = document.getElementById('affineInput').value;
+    const a = parseInt(document.getElementById('affineKeyA').value);
+    const b = parseInt(document.getElementById('affineKeyB').value);
+    if (!text) {
+      document.getElementById('affineResult').innerText = 'No Result';
+      return;
+    }
+    if (gcd(a, 26) !== 1) {
+      document.getElementById('affineResult').innerText =
+        'Error: Key a must be coprime with 26.';
+      return;
+    }
+    const cipher = affineCipherEncrypt(text, a, b);
+    document.getElementById('affineResult').innerText = cipher;
+  }
+  function affineDecrypt() {
+    const text = document.getElementById('affineInput').value;
+    const a = parseInt(document.getElementById('affineKeyA').value);
+    const b = parseInt(document.getElementById('affineKeyB').value);
+
+    if (!text) {
+      document.getElementById('affineResult').innerText = 'No Result';
+      return;
+    }
+    if (gcd(a, 26) !== 1) {
+      document.getElementById('affineResult').innerText =
+        'Error: Key a must be coprime with 26.';
+      return;
+    }
+    const plain = affineCipherDecrypt(text, a, b);
+    document.getElementById('affineResult').innerText = plain;
+  }
+
+  function affineBruteForce() {
+    const text = document.getElementById('affineInput').value;
+
+    if (!text) {
+      document.getElementById('affineResult').innerText = 'No Result';
+      return;
+    }
+    const results = affine_brute_force_decrypt(text);
+    // Show first few results and last one to fit in the box
+    let out = '';
+    for (let i = 0; i < Math.min(5, results.length); i++) {
+      out += `a=${results[i].a}, b=${results[i].b}: ${results[i].plaintext}\n`;
+    }
+    out += '...\n';
+    const last = results[results.length - 1];
+    out += `a=${last.a}, b=${last.b}: ${last.plaintext}`;
+
+    document.getElementById('affineResult').innerText = out;
+  }
+</script>
+  <!-- Full section with working video + fallback -->
+<!-- Transposition Cipher Section - FIXED -->
+<section class="page-content4">
+  <section class="text-section4">
+    <h1 class = "indent13">I.IV. Transposition Cipher</h1>
+    <p class="indent14">
+        In the fascinating world of cryptography, Transposition Cipher stands out as one of the oldest and simplest forms of encryption. Rather than changing the actual  letters or symbols 
+    </p>
+    <div class = "indent15">
+      (as substitution ciphers do), Transposition ciphers rearrange the positions of the characters, according to a specific system, creating a ciphertext that hides the original message.
+    </div>
+  </section>
+  <!-- 100% WORKING - Image + Link fallback -->
+  <div class="video-fallback">
+    <a href="https://www.youtube.com/watch?v=cPQXaYUMOjQ" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/cPQXaYUMOjQ/hqdefault.jpg" alt="Transposition Cipher Tutorial" class="video-thumbnail">
+    </a>
+  </div>
+</section>
+<!-- Transposition Cipher Demo -->
+<main class="demo-wrapper">
+  <h1 class="demo-title">Transposition Cipher Demo</h1>
+  <div class="demo-frame">
+    <div class="demo-frame-corner top-left"></div>
+    <div class="demo-frame-corner top-right"></div>
+    <div class="demo-frame-corner bottom-left"></div>
+    <div class="demo-frame-corner bottom-right"></div>
+    <div class="demo-inner">
+      <h2 class="demo-subtitle">Enter | Plain text or Cipher text</h2>
+      
+      <input type="text" id="transpositionInput" class="demo-input" placeholder="Enter text here" />
+      
+      <div class="demo-key-section">
+        <label class="key-label">Key:</label>
+        <input 
+          type="text" 
+          id="transpositionKey" 
+          class="key-input" 
+          placeholder="Enter key :"
+          value=""
+        />
+      </div>
+      
+      <div class="demo-buttons">
+        <button class="btn-pill btn-green" onclick="transpositionEncrypt()">Encrypt</button>
+        <button class="btn-pill btn-red" onclick="transpositionDecrypt()">Decrypt</button>
+      </div>
+      
+      <div class="demo-result-block">
+        <span class="demo-result-label">Result:</span>
+        <div id="transpositionResult" class="demo-result-box"></div>
+      </div>
+    </div>
+  </div>
+</main>
+ <script>
+    // ===== TRANSPOSITION CIPHER FUNCTIONS =====
+  function transpositionCipherEncrypt(plaintext, key) {
+  const numCols = key.length;
+  const numRows = Math.ceil(plaintext.length / numCols);
+  const paddedPlaintext = plaintext.padEnd(numRows * numCols, ' ');
+  const grid = [];
+  // Fill the grid row by row
+  for (let i = 0; i < numRows; i++) {
+    grid.push(paddedPlaintext.slice(i * numCols, (i + 1) * numCols));
+  }
+  // Sort the key and get the column order
+  const sortedKey = Array.from(key).map((char, index) => ({ char, index })).sort((a, b) => a.char.localeCompare(b.char));
+  const ciphertext = sortedKey.map(({ index }) => grid.map(row => row[index]).join('')).join('');
+  return ciphertext.trim();
+}
+  function transpositionCipherDecrypt(ciphertext, key) {
+  const numCols = key.length;
+  const numRows = Math.ceil(ciphertext.length / numCols);
+  const paddedCiphertext = ciphertext.padEnd(numRows * numCols, ' ');
+  const grid = Array.from({ length: numRows }, () => Array(numCols).fill(' '));
+
+  // Sort the key and get the column order
+  const sortedKey = Array.from(key).map((char, index) => ({ char, index })).sort((a, b) => a.char.localeCompare(b.char));
+  const sortedIndices = sortedKey.map(({ index }) => index);
+
+  // Fill the grid column by column
+  let charIndex = 0;
+  for (let i = 0; i < numCols; i++) {
+    const colIndex = sortedIndices[i];
+    for (let j = 0; j < numRows; j++) {
+      if (charIndex < paddedCiphertext.length) {
+        grid[j][colIndex] = paddedCiphertext[charIndex++];
+      }
+    }
+  }
+
+  // Read the grid row by row to reconstruct the plaintext
+  return grid.map(row => row.join('')).join('').trim();
+}
+
+// Button handlers
+function transpositionEncrypt() {
+  const input = document.getElementById('transpositionInput').value;
+  const key = document.getElementById('transpositionKey').value;
+  
+  if (!input || !key) {
+    document.getElementById('transpositionResult').innerText = 'Enter text and key';
+    return;
+  }
+  
+  const result = transpositionCipherEncrypt(input, key);
+  document.getElementById('transpositionResult').innerText = result;
+}
+
+function transpositionDecrypt() {
+  const input = document.getElementById('transpositionInput').value;
+  const key = document.getElementById('transpositionKey').value;
+  
+  if (!input || !key) {
+    document.getElementById('transpositionResult').innerText = 'Enter text and key';
+    return;
+  }
+  
+  const result = transpositionCipherDecrypt(input, key);
+  document.getElementById('transpositionResult').innerText = result;
+}
+  </script>
+<section>
+        <h1 class=" indent18">II.RSA</h1>
+        <h3 class=" indent19">II.I. RSA Cryptography</h3>
+        <p class="indent20">
+          "RSA (Rivest-Shamir-Adleman) is a widely used asymmetric encryption algorithm that relies on the mathematical properties of 
+        </p>
+         <p class="indent37">
+          prime numbers. It was invented in 1977 by Ron Rivest, Adi Shamir, and Leonard Adleman. RSA is based on the difficulty</p>
+          <p class="indent60"> of factoring large composite numbers into their prime factors.</p>
+         <h3 class="indent23">II.I.I RSA Keygen Demo</h3>
+         <p class ="indent37">"RSA Keygen (RSA Key Generation)" is the process of "creating a key" for the RSA system. Before encrypting or decrypting </p>
+         <p class="indent61">something, a key must be created first.</p>
+         <h3 class=" indent22"> => RSA Keygen has 5 main steps:</h3>
+          <div class="indent24">1. Choose Prime Number 2 : p and q</div>
+          <div class="indent25">2. Calculate n : </div>
+          <div class="indent26">n = p * q</div>
+          <div class="indent27">3. Calculate φ(n)</div>
+          <div class="indent28">φ(n) = (p - 1)(q - 1)</div>
+          <div class="indent29">4. Choose E :</div>
+          <div class="indent30">1 < e < φ(n)</div>
+          <div class="indent31">gcd(e, φ(n)) = 1</div>
+          <div class="indent32">5. Find value of D :</div>
+          <div class="indent33">d × e ≡ 1 (mod φ(n))</div>
+          <div class="indent34">Final result :</div>
+          <div class="indent35">- Public Key = (e, n)</div>
+          <div class="indent36">- Private Key = (d, n)</div>
+      </section>
+     </section>
+     <section>
+  <section >
+    <h3 class="indent38">II.I.II RSA Encryption Demo</h3>
+    <div class="indent40">RSA Encryption is a method of encrypting data using a two-key system (Asymmetric Key) in the RSA algorithm Which uses </div>
+    <div class="indent52 ">Public Key for Encryption.</div>
+    <h4 class="indent39">Algorithm of RSA Encryption :</h4>
+    <div class=" indent41">1. Key Generation that has already algorithms in " RSA Keygen ".</div>
+    <div class="indent42">2. Encryption Process.</div>
+    <div class="indent43">Input :</div>
+    <div class="indent44">  - Message (M) as Plaintext or Ciphertext.</div>
+    <div class="indent45">  - Public Key (e, n).</div>
+    <div class="indent46">3. Convert Message(M) to Number (intager).</div>
+    <div class="indent47">Example :</div>
+    <div class="indent48">A = 68</div>
+    <div class="indent49">4. Calculate Ciphertext</div>
+    <div class="indent50">Formula : C = M^e mod n</div>
+    <div class="indent51">Result C  is "Ciphertext".</div>
+   </section>
+ </section>
+     <section>
+  <section >
+    <h3 class="indent52">II.I.III RSA Decryption Demo</h3>
+    <div class="indent54">RSA Decryption is the process of converting Ciphertext to Plaintext using Secret key / Private key </div>
+    <div class="indent55 ">Decrypt is the process of converting an encrypted message back to its original form</div>
+    <h4 class="indent56">Algorithm of RSA Decryption :</h4>
+    <div class=" indent57">1. Receive encrypted number (C) from encryption ".</div>
+    <div class="indent58">2. Use private key (d, n) from encryption</div>
+     <div class="indent60">3. Formula of Computing : </div>
+    <div class="indent61">   M = C^d mod n</div>
+    <div class="indent62">Where : C = Ciphertext</div>
+    <div class="indent63">d = Private Key</div>
+    <div class="indent64">n = Modulus</div>
+    <div class="indent65">4. Convert result to ASCII character</div>
+    <div class="indent66">5. Combine characters → Plaintext</div>
+    </section>
+ </section>
+ <title>RSA Keygen & Encryption Demo - FIXED</title>
+<div class="section">
+<h1>🔐 RSA Key Generator</h1>
+<label>Prime p:</label>
+<input type="number" id="rsa-keygen-p" placeholder="e.g. 61">
+<label>Prime q:</label>
+<input type="number" id="rsa-keygen-q" placeholder="e.g. 53">
+<button onclick="generateKeys()">Generate Keys</button>
+<div id="key-result" class="result">Enter two prime numbers above</div>
+</div>
+<div class="section">
+<h1>🔒 RSA Encryption</h1>
+<label>Message:</label>
+<input type="text" id="message" placeholder="Enter text to encrypt" value="HELLO">
+<label>Public exponent (e):</label>
+<input type="number" id="public-e" placeholder="e">
+<label>Modulus (n):</label>
+<input type="number" id="modulus-n" placeholder="n">
+<button onclick="encryptMessage()">Encrypt</button>
+<div id="encrypt-result" class="result">Generate keys first, then enter message</div>
+</div>
+<script>
+// ✅ FIXED MODULAR INVERSE ALGORITHM
+function modInverse(a, m) {
+  let m0 = m;
+  let y = 0n, x = 1n;
+  if (m === 1n) return 0n;
+  while (a > 1n) {
+    const quotient = a / m;
+    const temp = m;
+    // FIXED: Proper Euclidean algorithm steps
+    m = a % m;
+    a = temp;
+    const tempY = y;
+    y = x - quotient * y;
+    x = tempY;
+  }
+  if (x < 0n) x += m0;
+  return x;
+}
+// ✅ FIXED RSA KEY GENERATION
+function generateRSAKeys(p, q) {
+  // FIX 1: All calculations now use BigInt
+  const pBig = BigInt(p);
+  const qBig = BigInt(q);
+  const n = pBig * qBig;
+  const phi = (pBig - 1n) * (qBig - 1n);
+  // Common choice for e (must be coprime with phi)
+  let e = 65537n;
+  if (gcd(e, phi) !== 1n) {
+    e = 17n; // Fallback
+  }
+  const d = modInverse(e, phi);
+  if (!d || d <= 0n) {
+    throw new Error('Invalid keys - p,q must be distinct primes');
+  }
+  return { n: n.toString(), e: e.toString(), d: d.toString(), phi: phi.toString() };
+}
+function gcd(a, b) {
+  while (b !== 0n) {
+    const t = b;
+    b = a % b;
+    a = t;
+  }
+  return a;
+}
+// ✅ RSA ENCRYPTION (Textbook RSA)
+function rsaEncryptChar(charCode, e, n) {
+  const m = BigInt(charCode);
+  if (m >= n) {
+    throw new Error('Message too large for this key size');
+  }
+  return modExp(m, BigInt(e), BigInt(n));
+}
+function modExp(base, exp, mod) {
+  let result = 1n;
+  base = base % mod;
+  while (exp > 0n) {
+    if (exp % 2n === 1n) {
+      result = (result * base) % mod;
+    }
+    exp = exp / 2n;
+    base = (base * base) % mod;
+  }
+  return result;
+}
+function generateKeys() {
+  const p = parseInt(document.getElementById('rsa-keygen-p').value);
+  const q = parseInt(document.getElementById('rsa-keygen-q').value);
+  if (!p || !q || p <= 1 || q <= 1 || p === q) {
+    document.getElementById('key-result').innerHTML = '<span class="warning">Error: Enter two DISTINCT primes > 1</span>';
+    return;
+  }
+  try {
+    const keys = generateRSAKeys(p, q);
+    document.getElementById('key-result').innerHTML = 
+      `Public Key:  (e = ${keys.e}, n = ${keys.n})\n` +
+      `Private Key: (d = ${keys.d}, n = ${keys.n})\n` +
+      `φ(n): ${keys.phi}`;
+    // Auto-fill encryption fields
+    document.getElementById('public-e').value = keys.e;
+    document.getElementById('modulus-n').value = keys.n;
+  } catch (error) {
+    document.getElementById('key-result').innerHTML = '<span class="warning">Error: ' + error.message + '</span>';
+  }
+}
+function encryptMessage() {
+  const message = document.getElementById('message').value;
+  const e = document.getElementById('public-e').value;
+  const n = document.getElementById('modulus-n').value;
+  if (!message || !e || !n) {
+    document.getElementById('encrypt-result').innerHTML = '<span class="warning">Fill all fields</span>';
+    return;
+  }
+  try {
+    const encrypted = [];
+    for (let i = 0; i < message.length; i++) {
+      const charCode = message.charCodeAt(i);
+      const ciphertext = rsaEncryptChar(charCode, e, n);
+      encrypted.push(ciphertext.toString());
+    }
+    
+    document.getElementById('encrypt-result').innerHTML = 
+      `Plaintext: ${message}\nCiphertext: ${encrypted.join(' ')}`;
+      
+  } catch (error) {
+    document.getElementById('encrypt-result').innerHTML = '<span class="warning">Error: ' + error.message + '</span>';
+  }
+}
+</script>
+  <h1>🔓 RSA Decryption Demo</h1>
+  
+  <div class="demo-box">
+    <label>Enter Ciphertext:</label>
+    <textarea id="ciphertext" rows="3" placeholder="Paste ciphertext from encryption (space-separated numbers like):"></textarea>
+    
+    <label>Enter Public Key (e):</label>
+    <input type="text" id="public-e" placeholder="Enter (e) from Encryption :">
+    
+    <label>Enter Modulus (n):</label>
+    <input type="text" id="modulus-n" placeholder="Enter (n) from Encryption :">
+    
+    <label>Enter Private Key (d):</label>
+    <input type="text" id="private-d" placeholder="Enter private exponent (d) from Encryption :">
+    
+    <button onclick="decryptMessage()">🔓 Decrypt</button>
+    
+    <div id="result" class="result-box">Result will appear here...</div>
+  </div>
+
+  <script>
+    // Helper functions (already in your code)
+    function modExp(base, exp, mod) {
+      let result = 1n;
+      base = base % mod;
+      while (exp > 0n) {
+        if (exp % 2n === 1n) {
+          result = (result * base) % mod;
+        }
+        exp = exp / 2n;
+        base = (base * base) % mod;
+      }
+      return result;
+    }
+
+    // ✅ RSA DECRYPTION FUNCTION (matches your encryption exactly)
+    function rsaDecryptChar(cipherCode, d, n) {
+      const c = BigInt(cipherCode);
+      if (c >= BigInt(n)) {
+        throw new Error('Ciphertext too large for this key size');
+      }
+      return modExp(c, BigInt(d), BigInt(n));
+    }
+
+    // Main decryption function - PERFECTLY MATCHES your encryption output
+    function decryptMessage() {
+      const ciphertextStr = document.getElementById('ciphertext').value.trim();
+      const e = document.getElementById('public-e').value;
+      const n = document.getElementById('modulus-n').value;
+      const d = document.getElementById('private-d').value;
+      
+      if (!ciphertextStr || !d || !n) {
+        document.getElementById('result').innerHTML = '<span class="warning">⚠️ Fill all fields: Ciphertext, d, and n required!</span>';
+        return;
+      }
+
+      try {
+        // Split by spaces (exactly matches your encryptMessage() output format)
+        const cipherChunks = ciphertextStr.split(/\s+/).filter(chunk => chunk.trim());
+        
+        if (cipherChunks.length === 0) {
+          throw new Error('No valid ciphertext found');
+        }
+        
+        let decryptedMessage = '';
+        
+        // Decrypt each number chunk back to character
+        for (let i = 0; i < cipherChunks.length; i++) {
+          const decryptedCode = rsaDecryptChar(cipherChunks[i], d, n);
+          const char = String.fromCharCode(Number(decryptedCode));
+          decryptedMessage += char;
+        }
+        
+        document.getElementById('result').innerHTML = 
+          `<strong>✅ Decryption Successful!</strong><br><br>` +
+          `<strong>Ciphertext:</strong> ${ciphertextStr.substring(0, 50)}${ciphertextStr.length > 50 ? '...' : ''}<br>` +
+          `<strong>Decrypted Message:</strong> ${decryptedMessage}`;
+          
+      } catch (error) {
+        document.getElementById('result').innerHTML = 
+          `<span class="warning">❌ Error: ${error.message}</span>`;
+      }
+    }
+
+    // Allow Enter key to trigger decryption
+    document.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && e.ctrlKey) {
+        decryptMessage();
+      }
+    });
+  </script>
+</body>
+</html>
+
+</body>
+</html>
+
+
+ 
